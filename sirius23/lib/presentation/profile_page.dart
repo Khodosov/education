@@ -29,24 +29,34 @@ class ProfilePage extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                'User name ${user.displayName}',
-                style: const TextStyle(fontSize: 30),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'User name ${user.displayName}',
+                    style: const TextStyle(fontSize: 30),
+                  ),
+                  Text(
+                    'User isAnonymous ${user.isAnonymous}',
+                    style: const TextStyle(fontSize: 30),
+                  ),
+                  Text(
+                    'User emailVerified ${user.emailVerified}',
+                    style: const TextStyle(fontSize: 30),
+                  ),
+                  Text(
+                    'User photoURL ${user.photoURL}',
+                    style: const TextStyle(fontSize: 30),
+                  ),
+                ],
               ),
-              Text(
-                'User isAnonymous ${user.isAnonymous}',
-                style: const TextStyle(fontSize: 30),
-              ),
-              Text(
-                'User emailVerified ${user.emailVerified}',
-                style: const TextStyle(fontSize: 30),
-              ),
-              Text(
-                'User photoURL ${user.photoURL}',
-                style: const TextStyle(fontSize: 30),
+              TextButton(
+                onPressed: () => throw Exception(),
+                child: const Text('Throw Test Exception'),
               ),
             ],
           ),
