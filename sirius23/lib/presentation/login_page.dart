@@ -16,11 +16,10 @@ class LoginPage extends StatelessWidget {
             return const SignInScreen(
               providerConfigs: [
                 EmailProviderConfiguration(),
-
-                // GoogleProviderConfiguration(
-                //   clientId:
-                //       '939439499093-7olcihphbek5slk3nuqd7koiufaea04p.apps.googleusercontent.com',
-                // ),
+                GoogleProviderConfiguration(
+                  clientId:
+                      '939439499093-7olcihphbek5slk3nuqd7koiufaea04p.apps.googleusercontent.com',
+                ),
               ],
             );
           }

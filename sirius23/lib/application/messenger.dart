@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:sirius23/application/logger.dart';
 
 import '../models/message.dart';
 
@@ -22,7 +21,7 @@ class Messenger {
   void init() {
     _messageSubscription = firestore
         .collection('messages')
-        .orderBy('timestamp', descending: true)
+        .orderBy('timestamp', descending: false)
         .snapshots()
         .listen((snapshot) {
       final messages = <Message>[];

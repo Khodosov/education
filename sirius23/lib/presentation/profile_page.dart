@@ -36,6 +36,7 @@ class ProfilePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  if (user.photoURL != null) Center(child: Image.network(user.photoURL!)),
                   Text(
                     'User name ${user.displayName}',
                     style: const TextStyle(fontSize: 30),
