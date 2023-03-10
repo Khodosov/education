@@ -1,30 +1,84 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+import 'package:sirius23/application/api.dart';
+import 'package:sirius23/application/di.dart';
 
-import 'package:sirius23/main.dart';
+import 'package:sirius23/presentation/messages_page.dart';
+
+import 'test_doubles/api_test.mocks.dart';
+import 'test_doubles/user_mock.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const App());
+  late Api api;
+  late User user;
+  const testName = 'TEST VALUE';
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  ///
+  /// Arrange
+  ///
+  setUp(() async {
+    api = MockApi();
+    user = UserMock(testName);
+    when(api.currentUserStream).thenAnswer((_) => const Stream.empty());
+    when(api.messages).thenAnswer((_) => const Stream.empty());
+    when(api.currentUser).thenAnswer((_) => user);
+    await Locator.initApp(api);
+  });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+  tearDown(() {
+    Locator.dispose();
+  });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  // Аналогично можно было вызвать setUpAll, который вызывается единожды и
+  // готовит окружение для всех тестов
+
+
+  testWidgets('Navigate to profile page', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: MessagesPage(),
+        ),
+      ),
+    );
+
+    ///
+    /// Act
+    ///
+    await tester.tap(find.byIcon(Icons.person));
+    //
+    // pump нам не хватит ведь одна итерация UI не переведет на новый экран
+    // await tester.pump();
+    await tester.pumpAndSettle();
+
+    ///
+    /// Assert
+    ///
+    expect(find.byIcon(Icons.arrow_back), findsOneWidget);
+  });
+
+  testWidgets('Test fields display', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: MessagesPage(),
+        ),
+      ),
+    );
+
+    ///
+    /// Act
+    ///
+    await tester.tap(find.byIcon(Icons.person));
+    await tester.pumpAndSettle();
+
+    ///
+    /// Assert
+    ///
+    expect(find.byIcon(Icons.arrow_back), findsOneWidget);
+    expect(find.text('User name $testName'), findsOneWidget);
+    expect(find.text(user.email!), findsOneWidget);
   });
 }

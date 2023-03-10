@@ -1,54 +1,12 @@
-import 'dart:async';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
 import '../models/message.dart';
 
 class Messenger {
-  final FirebaseFirestore firestore;
-  final FirebaseAuth auth;
+  Messenger();
 
-  Messenger(
-    this.firestore,
-    this.auth,
-  );
-
-  late final StreamSubscription _messageSubscription;
-
-  final StreamController<List<Message>> _messages = StreamController.broadcast();
-
-  void init() {
-    _messageSubscription = firestore
-        .collection('messages')
-        .orderBy('timestamp', descending: false)
-        .snapshots()
-        .listen((snapshot) {
-      final messages = <Message>[];
-      for (final document in snapshot.docs) {
-        messages.add(
-          Message(
-            author: document.data()['author'] as String,
-            message: document.data()['message'] as String,
-          ),
-        );
-      }
-      _messages.add(messages);
-    });
+  Message parseMessage(Map<String, dynamic> data) {
+    return Message(
+      author: data['author'] as String,
+      message: data['message'] as String,
+    );
   }
-
-  void dispose() {
-    _messageSubscription.cancel();
-    _messages.close();
-  }
-
-  void post(String message) {
-    firestore.collection('messages').add(<String, dynamic>{
-      'author': auth.currentUser?.email ?? 'unknown',
-      'message': message,
-      'timestamp': DateTime.now().millisecondsSinceEpoch,
-    });
-  }
-
-  Stream<List<Message>> get messages => _messages.stream;
 }

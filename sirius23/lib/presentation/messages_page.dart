@@ -34,7 +34,7 @@ class _MessagesPageState extends State<MessagesPage> {
                 context,
                 MaterialPageRoute<ProfilePage>(
                   builder: (context) => ProfilePage(
-                    user: Locator.firebaseAuth.currentUser!,
+                    user: Locator.api.currentUser!,
                   ),
                 ),
               );
@@ -46,7 +46,7 @@ class _MessagesPageState extends State<MessagesPage> {
           children: [
             Expanded(
               child: StreamBuilder<List<Message>>(
-                stream: Locator.messenger.messages,
+                stream: Locator.api.messages,
                 builder: (context, snapshot) => snapshot.hasData
                     ? ListView.builder(
                         itemCount: snapshot.requireData.length,
@@ -65,6 +65,7 @@ class _MessagesPageState extends State<MessagesPage> {
                   children: [
                     Expanded(
                       child: TextFormField(
+                        key: const ValueKey('TextForm'),
                         controller: _controller,
                         decoration: const InputDecoration(
                           hintText: 'Leave a message',
@@ -81,7 +82,7 @@ class _MessagesPageState extends State<MessagesPage> {
                     IconButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          Locator.messenger.post(_controller.text);
+                          Locator.api.post(_controller.text);
                           _controller.clear();
                         }
                       },

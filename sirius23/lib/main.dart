@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:sirius23/application/api.dart';
 import 'package:sirius23/presentation/login_page.dart';
 
 import 'application/di.dart';
 
 void main() async {
-  await Locator.initApp();
+  await Locator.initApp(ApiImpl());
   runApp(const App());
 }
 

@@ -9,7 +9,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => StreamBuilder<User?>(
-        stream: Locator.firebaseAuth.authStateChanges(),
+        stream: Locator.api.currentUserStream,
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             /// Default widget!

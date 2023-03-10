@@ -16,10 +16,16 @@ class ProfilePage extends StatelessWidget {
         appBar: AppBar(
           centerTitle: false,
           title: Text(user.email ?? ''),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            icon: const Icon(Icons.arrow_back),
+          ),
           actions: [
             IconButton(
               onPressed: () {
-                Locator.firebaseAuth.signOut();
+                Locator.api.signOut();
                 Navigator.of(context).pop();
               },
               icon: const Icon(Icons.logout_rounded),
