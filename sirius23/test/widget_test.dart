@@ -6,8 +6,9 @@ import 'package:sirius23/application/api.dart';
 import 'package:sirius23/application/di.dart';
 
 import 'package:sirius23/presentation/messages_page.dart';
+import 'package:sirius23/presentation/profile_page.dart';
 
-import 'test_doubles/api_test.mocks.dart';
+import 'test_doubles/api_mock.mocks.dart';
 import 'test_doubles/user_mock.dart';
 
 void main() {
@@ -34,7 +35,6 @@ void main() {
   // Аналогично можно было вызвать setUpAll, который вызывается единожды и
   // готовит окружение для всех тестов
 
-
   testWidgets('Navigate to profile page', (WidgetTester tester) async {
     await tester.pumpWidget(
       const MaterialApp(
@@ -42,6 +42,11 @@ void main() {
           body: MessagesPage(),
         ),
       ),
+    );
+    // Golden
+    await expectLater(
+      find.byType(MessagesPage),
+      matchesGoldenFile('goldens/message_page.png'),
     );
 
     ///
@@ -57,6 +62,11 @@ void main() {
     /// Assert
     ///
     expect(find.byIcon(Icons.arrow_back), findsOneWidget);
+    // Golden
+    await expectLater(
+      find.byType(ProfilePage),
+      matchesGoldenFile('goldens/profile_page.png'),
+    );
   });
 
   testWidgets('Test fields display', (WidgetTester tester) async {

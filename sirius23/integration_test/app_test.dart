@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:sirius23/application/logger.dart';
+import 'package:sirius23/main.dart';
 import 'test_main.dart' as test_app;
 
-void main() {
+void main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   setUp(() => Logger.log('Next test is running...'));
+
+  // Метод тулкита
+  // await loadAppFonts();
 
   testWidgets('App launch test', (WidgetTester tester) async {
     test_app.main();
