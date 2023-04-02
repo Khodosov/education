@@ -53,6 +53,10 @@ class ProfilePage extends StatelessWidget {
                     'User photoURL ${user.photoURL}',
                     style: const TextStyle(fontSize: 30),
                   ),
+                  Text(
+                    'User creationTime ${user.metadata.creationTime}',
+                    style: const TextStyle(fontSize: 30),
+                  ),
                 ],
               ),
               TextButton(
