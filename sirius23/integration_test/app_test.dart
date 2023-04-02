@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:sirius23/application/logger.dart';
-import 'package:sirius23/main.dart';
 import 'test_main.dart' as test_app;
 
 void main() async {
@@ -112,120 +111,12 @@ void main() async {
     expect(find.byIcon(Icons.person), findsOneWidget);
     expect(find.byIcon(Icons.send), findsOneWidget);
 
-    await tester.enterText(
-        find.byKey(const ValueKey('TextForm')), 'Another message');
-    await tester.tap(find.byIcon(Icons.send));
-    await tester.pumpAndSettle();
-
-    await tester.enterText(
-        find.byKey(const ValueKey('TextForm')), 'Another message');
-    await tester.tap(find.byIcon(Icons.send));
-    await tester.pumpAndSettle();
-
-    await tester.enterText(
-        find.byKey(const ValueKey('TextForm')), 'Another message');
-    await tester.tap(find.byIcon(Icons.send));
-    await tester.pumpAndSettle();
-
-    await tester.enterText(
-        find.byKey(const ValueKey('TextForm')), 'Another message');
-    await tester.tap(find.byIcon(Icons.send));
-    await tester.pumpAndSettle();
-
-    await tester.enterText(
-        find.byKey(const ValueKey('TextForm')), 'Another message');
-    await tester.tap(find.byIcon(Icons.send));
-    await tester.pumpAndSettle();
-
-    await tester.enterText(
-        find.byKey(const ValueKey('TextForm')), 'Another message');
-    await tester.tap(find.byIcon(Icons.send));
-    await tester.pumpAndSettle();
-
-    await tester.enterText(
-        find.byKey(const ValueKey('TextForm')), 'Another message');
-    await tester.tap(find.byIcon(Icons.send));
-    await tester.pumpAndSettle();
-
-    await tester.enterText(
-        find.byKey(const ValueKey('TextForm')), 'Another message');
-    await tester.tap(find.byIcon(Icons.send));
-    await tester.pumpAndSettle();
-
-    await tester.enterText(
-        find.byKey(const ValueKey('TextForm')), 'Another message');
-    await tester.tap(find.byIcon(Icons.send));
-    await tester.pumpAndSettle();
-
-    await tester.enterText(
-        find.byKey(const ValueKey('TextForm')), 'Another message');
-    await tester.tap(find.byIcon(Icons.send));
-    await tester.pumpAndSettle();
-
-    await tester.enterText(
-        find.byKey(const ValueKey('TextForm')), 'Another message');
-    await tester.tap(find.byIcon(Icons.send));
-    await tester.pumpAndSettle();
-
-    await tester.enterText(
-        find.byKey(const ValueKey('TextForm')), 'Another message');
-    await tester.tap(find.byIcon(Icons.send));
-    await tester.pumpAndSettle();
-
-    await tester.enterText(
-        find.byKey(const ValueKey('TextForm')), 'Another message');
-    await tester.tap(find.byIcon(Icons.send));
-    await tester.pumpAndSettle();
-
-    await tester.enterText(
-        find.byKey(const ValueKey('TextForm')), 'Another message');
-    await tester.tap(find.byIcon(Icons.send));
-    await tester.pumpAndSettle();
-
-    await tester.enterText(
-        find.byKey(const ValueKey('TextForm')), 'Another message');
-    await tester.tap(find.byIcon(Icons.send));
-    await tester.pumpAndSettle();
-
-    await tester.enterText(
-        find.byKey(const ValueKey('TextForm')), 'Another message');
-    await tester.tap(find.byIcon(Icons.send));
-    await tester.pumpAndSettle();
-
-    await tester.enterText(
-        find.byKey(const ValueKey('TextForm')), 'Another message');
-    await tester.tap(find.byIcon(Icons.send));
-    await tester.pumpAndSettle();
-
-    await tester.enterText(
-        find.byKey(const ValueKey('TextForm')), 'Another message');
-    await tester.tap(find.byIcon(Icons.send));
-    await tester.pumpAndSettle();
-
-    await tester.enterText(
-        find.byKey(const ValueKey('TextForm')), 'Another message');
-    await tester.tap(find.byIcon(Icons.send));
-    await tester.pumpAndSettle();
-
-    await tester.enterText(
-        find.byKey(const ValueKey('TextForm')), 'Another message');
-    await tester.tap(find.byIcon(Icons.send));
-    await tester.pumpAndSettle();
-
-    await tester.enterText(
-        find.byKey(const ValueKey('TextForm')), 'Another message');
-    await tester.tap(find.byIcon(Icons.send));
-    await tester.pumpAndSettle();
-
-    await tester.enterText(
-        find.byKey(const ValueKey('TextForm')), 'Another message');
-    await tester.tap(find.byIcon(Icons.send));
-    await tester.pumpAndSettle();
-
-    await tester.enterText(
-        find.byKey(const ValueKey('TextForm')), 'Another message');
-    await tester.tap(find.byIcon(Icons.send));
-    await tester.pumpAndSettle();
+    for (int i = 0; i <= 20; i++) {
+      await tester.enterText(
+          find.byKey(const ValueKey('TextForm')), 'Another message');
+      await tester.tap(find.byIcon(Icons.send));
+      await tester.pumpAndSettle();
+    }
 
     await tester.enterText(
         find.byKey(const ValueKey('TextForm')), 'Goodbye auto test!');
